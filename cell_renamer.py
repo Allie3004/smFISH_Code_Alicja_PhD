@@ -4,15 +4,17 @@ import numpy as np
 import os
 os.chdir("/Users/alicja/Desktop/egl-18_cy5_elt-1_red_in_ceh_mut")
 file = pd.read_csv(r'egl-18_at_26hrs_ceh_mut.csv', header = 0)
+strain= 'ceh-16_bp323_'
+probe = 'egl-18_cy5'
 hours_of_development = 26
-#worms = file['Worm'].values.ravel()
-# worms = pd.unique(worms)
+worms = file['Worm'].values.ravel()
+worms = pd.unique(worms)
 sets = 1
 l2_cells = {'V1':['h','j','k','l'],'V2':['n','m','t','y'],'V3':['u','i','o','p'],'V4':['1','2','3','5'],'V5':['6','7','8','9'],'V6':['0','e','v','b'],'T':['+','.','<','-']}
 #print(l2_cells['V1'][1])
 cells = 'V1','V2','V3','V4','V6','T'
 #cells = 'V1','V2','V3'
-worms = 1,6,87
+#worms = 1,6,87
 sets = 'a'
 for worm in worms:
 
@@ -64,4 +66,6 @@ for worm in worms:
         print('b')
     """
     file.update(set)
+file.columns = ['Cell','Worm','mRNA']
 print(file)
+file.to_csv(str(probe)+'_at_'+str(hours_of_development)+'_in_'+str(strain)+'.csv', index = False, header = True)
