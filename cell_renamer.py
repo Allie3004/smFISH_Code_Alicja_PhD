@@ -10,11 +10,12 @@ worms = pd.unique(worms)
 sets = 1
 l2_cells = {'V1':['h','j','k','l'],'V2':['n','m','t','y'],'V3':['u','i','o','p'],'V4':['1','2','3','5'],'V5':['6','7','8','9'],'V6':['0','e','v','b'],'T':['+','.','<','-']}
 #print(l2_cells['V1'][1])
-cells = 'V1','V2','V3','V4','V6','T'
+cells = 'V1','V2','V3','V4','V5','V6','T'
 #cells = 'V1','V2','V3'
 #worms = 1,6,87
-sets = 1
+sets = 'a'
 for worm in worms:
+
     set = file[file['Worm']==worm]
     set['ROI_attribute'] = set['ROI_attribute'].replace({'a':'H0'})
     if 's' in set['ROI_attribute'].unique():
@@ -25,6 +26,7 @@ for worm in worms:
         set['ROI_attribute'] = set['ROI_attribute'].replace({'f':'H2a','g':'H2p'})
     elif 'g' in set['ROI_attribute'].unique():
         set['ROI_attribute'] = set['ROI_attribute'].replace({'g':'H2'})
+
     for cell in cells:
         if (l2_cells[str(cell)][0] in set['ROI_attribute'].unique() and l2_cells[str(cell)][2]) in set['ROI_attribute'].unique():
             set['ROI_attribute'] = set['ROI_attribute'].replace({l2_cells[str(cell)][0]:str(cell)+'aa',l2_cells[str(cell)][1]:str(cell)+'ap',l2_cells[str(cell)][2]:str(cell)+'pa',l2_cells[str(cell)][3]:str(cell)+'pp'})
@@ -34,6 +36,15 @@ for worm in worms:
             set['ROI_attribute'] = set['ROI_attribute'].replace({l2_cells[str(cell)][1]:str(cell)+'a',l2_cells[str(cell)][2]:str(cell)+'pa',l2_cells[str(cell)][3]:str(cell)+'pp'})
         elif l2_cells[str(cell)][1] in set['ROI_attribute'].unique() and l2_cells[str(cell)][3] in set['ROI_attribute'].unique():
             set['ROI_attribute'] = set['ROI_attribute'].replace({l2_cells[str(cell)][1]:str(cell)+'a',l2_cells[str(cell)][3]:str(cell)+'p'})
-        elif l2_cells[str(cell)][3] in set['ROI_attribute']:
+        if cell == 'V5':
+            if 'e' in set['ROI_attribute'].unique() and l2_cells['V5'][3] in set['ROI_attribute'].unique() :
+                set['ROI_attribute'] = set['ROI_attribute'].replace({'V5pp'})
+        elif l2_cells[str(cell)][3] in set['ROI_attribute'].unique():
             set['ROI_attribute'] = set['ROI_attribute'].replace({l2_cells[str(cell)][3]:str(cell)})
+    """
+    if sets == 'a':
+        sets = set
+    else:
+        print('b')
+    """
     print(set)
