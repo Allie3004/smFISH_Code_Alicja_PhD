@@ -7,17 +7,13 @@ file = pd.read_csv(r'egl-18_at_26hrs_ceh_mut.csv', header = 0)
 strain= 'ceh-16_bp323_'
 probe = 'egl-18_cy5'
 hours_of_development = 26
+#assign the values you used for each cell kind in here
+l2_cells = {'V1':['h','j','k','l'],'V2':['n','m','t','y'],'V3':['u','i','o','p'],'V4':['1','2','3','5'],'V5':['6','7','8','9'],'V6':['0','e','v','b'],'T':['+','.','<','-']}
+#from here down its just automatic
 worms = file['Worm'].values.ravel()
 worms = pd.unique(worms)
-sets = 1
-l2_cells = {'V1':['h','j','k','l'],'V2':['n','m','t','y'],'V3':['u','i','o','p'],'V4':['1','2','3','5'],'V5':['6','7','8','9'],'V6':['0','e','v','b'],'T':['+','.','<','-']}
-#print(l2_cells['V1'][1])
 cells = 'V1','V2','V3','V4','V6','T'
-#cells = 'V1','V2','V3'
-#worms = 1,6,87
-sets = 'a'
 for worm in worms:
-
     set = file[file['Worm']==worm]
     set['ROI_attribute'] = set['ROI_attribute'].replace({'a':'H0'})
     if 's' in set['ROI_attribute'].unique():
@@ -47,7 +43,6 @@ for worm in worms:
                 set['ROI_attribute'] = set['ROI_attribute'].replace({l2_cells['V5'][3]:'V5pp'})
         else:
             set['ROI_attribute'] = set['ROI_attribute'].replace({l2_cells['V5'][3]:'V5'})
-
     for cell in cells:
         if (l2_cells[str(cell)][0] in set['ROI_attribute'].unique() and l2_cells[str(cell)][2]) in set['ROI_attribute'].unique():
             set['ROI_attribute'] = set['ROI_attribute'].replace({l2_cells[str(cell)][0]:str(cell)+'aa',l2_cells[str(cell)][1]:str(cell)+'ap',l2_cells[str(cell)][2]:str(cell)+'pa',l2_cells[str(cell)][3]:str(cell)+'pp'})
@@ -59,12 +54,6 @@ for worm in worms:
             set['ROI_attribute'] = set['ROI_attribute'].replace({l2_cells[str(cell)][1]:str(cell)+'a',l2_cells[str(cell)][3]:str(cell)+'p'})
         elif l2_cells[str(cell)][3] in set['ROI_attribute'].unique():
             set['ROI_attribute'] = set['ROI_attribute'].replace({l2_cells[str(cell)][3]:str(cell)})
-    """
-    if sets == 'a':
-        sets = set
-    else:
-        print('b')
-    """
     file.update(set)
 file.columns = ['Cell','Worm','mRNA']
 print(file)
