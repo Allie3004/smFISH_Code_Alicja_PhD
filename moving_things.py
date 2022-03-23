@@ -2,12 +2,12 @@ import os
 import shutil
 print(os.getcwd())
 
-os.chdir('/Users/alicja/Desktop/egl-18_cy5_elt-1_red_in_ceh_mut/tiffs/analyzed')
+os.chdir('/Users/alicja/Desktop/pop-1_cy5_in_JR667/tiffs/analyzed')
 
 for filename in os.listdir():
-    if '45' in str(filename):
+    if '30' in str(filename):
     #if '90' in str(filename):
-        shutil.move(filename,'/Users/alicja/Desktop/egl-18_cy5_elt-1_red_in_ceh_mut/bin')
+        shutil.move(filename,'/Users/alicja/Desktop/pop-1_cy5_in_JR667/tiffs/trash')
 
 """
 for x in range(18,42):
