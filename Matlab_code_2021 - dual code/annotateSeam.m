@@ -15,7 +15,7 @@ ROI_labels={'a','s','d','f','g','h','j','k','l','n','m','t','y','u','i','o','p',
 %thresholds=[5e-4, 1e-5, 15e-4,1e-4];
 thresholds=[5e-4, 1e-5, 15e-4];
 % master folder 
-geneDir = '/Users/alicja/Desktop/hbl-1_collab';
+geneDir = '/Users/alicja/Desktop';
 
 %%
 % load images
